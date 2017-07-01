@@ -45,7 +45,6 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
     public static final String MOVIE = "movie";
 
     private static final String IMDB_URL = "http://www.imdb.com/title/";
-    private static final String THE_MOVIE_DB_MOVIE_VIEW = "https://www.themoviedb.org/movie/";
 
     int currentlySelectedItem = 0;
 
@@ -156,7 +155,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
                 movieItemIMDBIcon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(THE_MOVIE_DB_MOVIE_VIEW.concat(String.valueOf(id)))));
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Const.THE_MOVIE_DB_MOVIE_VIEW.concat(String.valueOf(id)))));
                     }
                 });
             } catch (Exception e) {

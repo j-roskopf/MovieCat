@@ -16,6 +16,10 @@ public class Const {
 
     public static String BASE_PERSON_PATH = "https://image.tmdb.org/t/p/w500/";
 
+    public static String IMDB_URL = "http://www.imdb.com/title/";
+
+    public static String THE_MOVIE_DB_MOVIE_VIEW = "https://www.themoviedb.org/movie/";
+
     public static int dpToPx(int dp) {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }

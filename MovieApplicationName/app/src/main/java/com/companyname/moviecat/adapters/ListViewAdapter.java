@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.companyname.movieapplicationname.R;
 import com.companyname.moviecat.activities.DetailActivity;
+import com.companyname.moviecat.data.Const;
 import com.companyname.moviecat.models.MovieSearchResults;
 
 import java.util.List;
@@ -27,8 +28,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.MovieResultViewHolder> {
-
-    private static final String IMDB_URL = "http://www.imdb.com/title/";
 
     int currentlySelectedItem = 0;
 
@@ -81,7 +80,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.MovieR
                 movieItemIMDBIcon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(IMDB_URL.concat(imdbId))));
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Const.IMDB_URL.concat(imdbId))));
                     }
                 });
             }catch (Exception e){

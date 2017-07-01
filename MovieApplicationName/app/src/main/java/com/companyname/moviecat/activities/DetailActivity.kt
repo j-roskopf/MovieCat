@@ -65,11 +65,7 @@ class DetailActivity : AppCompatActivity() {
 
         val movieApiManager: MovieApiManager = MovieApiManager(this)
 
-        fetchDetails(movie.id, movieApiManager)
-
         fetchImages(movie.id, movieApiManager)
-
-        fetchCastAndCredits(movie.id, movieApiManager)
 
         displayMovie(movie)
 
@@ -106,22 +102,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     /**
-     * Makes call to get movie details
-     */
-    private fun fetchDetails(id: Int, movieApiManager: MovieApiManager) {
-
-        movieApiManager.getMovie(java.lang.String.valueOf(id), object : Callback<com.companyname.moviecat.models.retrofit.movie_find.Movie>() {
-            override fun success(movie: com.companyname.moviecat.models.retrofit.movie_find.Movie) {
-                //Toast.makeText(context, movie.title, Toast.LENGTH_SHORT).show()
-            }
-
-            override fun failure(message: String?) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-    /**
      * Fetch images for movie
      */
     private fun fetchImages(id: Int, movieApiManager: MovieApiManager) {
@@ -135,10 +115,6 @@ class DetailActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun fetchCastAndCredits(id: Int, movieApiManager: MovieApiManager) {
-    }
-
     /**
      * Display image
      */
@@ -163,7 +139,7 @@ class DetailActivity : AppCompatActivity() {
      */
     private fun setupFragmentViewPager(id: Int) {
         val adapter: DetailViewFragmentViewPagerAdapter = DetailViewFragmentViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(InfoFragment(), "Information")
+        adapter.addFragment(InfoFragment.newInstance(java.lang.String.valueOf(id)), "Information")
         adapter.addFragment(CastAndCreditFragment.newInstance(java.lang.String.valueOf(id)), "Cast")
         adapter.addFragment(RecommendationFragment.newInstance(java.lang.String.valueOf(id)), "Recommendation")
         detailViewFragmentViewPager.adapter = adapter
