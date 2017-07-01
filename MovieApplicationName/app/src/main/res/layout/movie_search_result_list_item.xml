@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/movieItemCardview"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/movieInfoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/movieDetailContainer"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/movieItemPosterImage"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/movieItemTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Spider Man"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_below="@+id/movieItemTitle"
+                        android:id="@+id/movieItemSummary"
+                        android:layout_width="match_parent"
+                        android:ellipsize="end"
+                        android:lines="7"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_height="wrap_content" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/movieDetailContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/movieItemYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:text="2002" />
+
+                <ImageView
+                    android:id="@+id/movieItemIMDBIcon"
+                    android:layout_width="24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/tmdb" />
+
+                <TextView
+                    android:id="@+id/movieItemMovieType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:text="Movie" />
+
+                <com.varunest.sparkbutton.SparkButton
+                    android:id="@+id/movieItemAdd"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignBottom="@+id/movieDetailContainer"
+                    android:layout_toLeftOf="@+id/movieItemFavorite"
+                    android:layout_margin="8dp"
+                    app:sparkbutton_activeImage="@drawable/ic_add_circle_blue_500_48dp"
+                    app:sparkbutton_iconSize="24dp"
+                    app:sparkbutton_inActiveImage="@drawable/ic_add_circle_black_48dp"
+                    app:sparkbutton_primaryColor="@color/colorPrimary"
+                    app:sparkbutton_secondaryColor="@color/colorPrimaryDark" />
+
+            </LinearLayout>
+
+            <com.varunest.sparkbutton.SparkButton
+                android:id="@+id/movieItemFavorite"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignBottom="@+id/movieDetailContainer"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="8dp"
+                app:sparkbutton_activeImage="@drawable/ic_favorite_red_500_48dp"
+                app:sparkbutton_iconSize="24dp"
+                app:sparkbutton_inActiveImage="@drawable/ic_favorite_black_18dp"
+                app:sparkbutton_primaryColor="@color/heart_primary_color"
+                app:sparkbutton_secondaryColor="@color/heart_secondary_color" />
+
+            <com.varunest.sparkbutton.SparkButton
+                android:id="@+id/movieItemRate"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignBottom="@+id/movieDetailContainer"
+                android:layout_toLeftOf="@+id/movieItemFavorite"
+                android:layout_margin="8dp"
+                app:sparkbutton_activeImage="@drawable/ic_star_yellow_500_48dp"
+                app:sparkbutton_iconSize="24dp"
+                app:sparkbutton_inActiveImage="@drawable/ic_star_black_48dp"
+                app:sparkbutton_primaryColor="@color/star_primary_color"
+                app:sparkbutton_secondaryColor="@color/star_secondary_color" />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

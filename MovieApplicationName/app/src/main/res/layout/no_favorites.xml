@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:layout_below="@+id/favoritesToolbar"
+    android:id="@+id/favoritesNoFavoritesContainer"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/heart_large"
+        android:layout_width="128dp"
+        android:id="@+id/favoritesHeart"
+        android:layout_centerInParent="true"
+        android:layout_margin="8dp"
+        android:layout_height="128dp" />
+
+    <TextView
+        android:layout_below="@+id/favoritesHeart"
+        android:textColor="@color/onboardingBackground"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:text="@string/no_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

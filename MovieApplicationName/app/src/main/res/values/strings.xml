@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Movie Cat</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_favorites">You don\'t seem to have any favorites. Try adding some!</string>
+    <string name="no_recommendation">This movie appears to be so unique, there\'s nothing quite like it!</string>
+</resources>

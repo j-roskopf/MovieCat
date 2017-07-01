@@ -1,0 +1,247 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.companyname.moviecat.fragments.detail.InfoFragment">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- IMDB -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/imdb_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:text="IMDB"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- WATCHED -->
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/ic_check_black_24dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:text="Watched"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- FAVORITE -->
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/ic_favorite_red_500_18dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:text="Favorite"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- VOTE AVERAGE -->
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/ic_star_yellow_500_24dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:text="Rating"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- VOTE COUNT -->
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/ic_thumb_up_black_24dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:text="Votes"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- Similar -->
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/ic_launch_black_24dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:text="Similar"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- Reviews -->
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/ic_person_black_24dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:text="Reviews"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- Recommendations -->
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/ic_share_black_24dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp" />
+
+                    <TextView
+                        android:text="Share"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/detailViewTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:tabGravity="fill"
+                app:tabMode="scrollable" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/detailViewFragmentViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</FrameLayout>
