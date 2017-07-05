@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.MenuItem
@@ -17,9 +19,12 @@ import android.widget.Toast
 import butterknife.ButterKnife
 import com.companyname.movieapplicationname.R
 import com.companyname.moviecat.adapters.MovieSearchResultAdapter
+import com.companyname.moviecat.adapters.MyListAdapter
 import com.companyname.moviecat.adapters.detail.DetailViewFragmentViewPagerAdapter
 import com.companyname.moviecat.adapters.detail.DetailViewImageViewPagerAdapter
 import com.companyname.moviecat.data.MovieApiManager
+import com.companyname.moviecat.events.AddListEvent
+import com.companyname.moviecat.firebase.MasterUserList
 import com.companyname.moviecat.fragments.detail.CastAndCreditFragment
 import com.companyname.moviecat.fragments.detail.InfoFragment
 import com.companyname.moviecat.fragments.detail.RecommendationFragment
@@ -29,8 +34,13 @@ import com.companyname.moviecat.models.MovieSearchResults
 import com.companyname.moviecat.models.retrofit.movie_find.Backdrop
 import com.companyname.moviecat.models.retrofit.movie_find.Image
 import com.companyname.moviecat.models.retrofit.movie_find.Poster
+import com.companyname.moviecat.util.ListUtil
 import com.mancj.slideup.SlideUp
+import kotlinx.android.synthetic.main.rating_view.*
 import me.relex.circleindicator.CircleIndicator
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class DetailActivity : AppCompatActivity() {
 
@@ -51,6 +61,8 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var slideUp: SlideUp
 
+    private lateinit var movie: MovieSearchResults
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -61,13 +73,15 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val movie: MovieSearchResults = intent.extras.getParcelable<MovieSearchResults>(MovieSearchResultAdapter.MOVIE)
+        movie = intent.extras.getParcelable<MovieSearchResults>(MovieSearchResultAdapter.MOVIE)
 
         val movieApiManager: MovieApiManager = MovieApiManager(this)
 
         fetchImages(movie.id, movieApiManager)
 
         displayMovie(movie)
+
+        setupSlideRecyclerView()
 
         prepareRatingView()
 
@@ -148,6 +162,18 @@ class DetailActivity : AppCompatActivity() {
         detailViewTabLayout.setupWithViewPager(detailViewFragmentViewPager)
     }
 
+    /**
+     * Prepares a list of all the users list to be displayed in the slide up view
+     */
+    private fun setupSlideRecyclerView() {
+        val mLayoutManager = LinearLayoutManager(this)
+        ratingList.layoutManager = mLayoutManager
+        ratingList.itemAnimator = DefaultItemAnimator()
+        ratingList.adapter = MyListAdapter(true,
+                MasterUserList.getInstance().firebaseMovieListslist,
+                this)
+    }
+
     private fun prepareRatingView() {
         slideUp = SlideUp.Builder(ratingView)
                 .withListeners(object : SlideUp.Listener {
@@ -180,5 +206,20 @@ class DetailActivity : AppCompatActivity() {
         detailViewFloatingActionButton.setOnClickListener {
             slideUp.show()
         }
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    public override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(addListEvent: AddListEvent) {
+            ListUtil.addMovieToList(dimView, addListEvent.userList.listName, movie, MasterUserList.getInstance().firebaseMovieListslist)
     }
 }
