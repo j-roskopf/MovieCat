@@ -12,11 +12,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:layout_marginTop="32dp"
             android:orientation="vertical"
+            android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- TOP ROW -->
             <LinearLayout
                 android:weightSum="4"
                 android:orientation="horizontal"
@@ -123,6 +124,7 @@
 
             </LinearLayout>
 
+            <!-- BOTTOM ROW -->
             <LinearLayout
                 android:weightSum="4"
                 android:orientation="horizontal"
@@ -229,20 +231,135 @@
 
             </LinearLayout>
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/detailViewTabLayout"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_margin="8dp"
+                android:weightSum="10"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                app:tabGravity="fill"
-                app:tabMode="scrollable" />
+                android:layout_height="match_parent">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/detailViewFragmentViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                <RelativeLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
+                    <TextView
+                        android:id="@+id/infoFragmentOverviewHeader"
+                        android:text="Synopsis: "
+                        android:layout_margin="4dp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentOverViewText"
+                        android:layout_width="match_parent"
+                        android:layout_toRightOf="@+id/infoFragmentOverviewHeader"
+                        android:layout_margin="4dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentRunTimeHeader"
+                        android:text="Running:"
+                        android:layout_margin="4dp"
+                        android:textStyle="bold"
+                        android:layout_alignBaseline="@+id/infoFragmentRunTimeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentRunTimeText"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_alignLeft="@+id/infoFragmentOverViewText"
+                        android:layout_below="@+id/infoFragmentOverViewText"
+                        android:layout_toRightOf="@+id/infoFragmentRunTimeHeader"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentBudgetHeader"
+                        android:text="Budget:"
+                        android:layout_margin="4dp"
+                        android:layout_alignBaseline="@+id/infoFragmentBudgetText"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentBudgetText"
+                        android:layout_below="@+id/infoFragmentRunTimeText"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_alignLeft="@+id/infoFragmentOverViewText"
+                        android:layout_toRightOf="@+id/infoFragmentBudgetHeader"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentRevenueHeader"
+                        android:text="Revenue:"
+                        android:layout_margin="4dp"
+                        android:layout_alignBaseline="@+id/infoFragmentRevenueText"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentRevenueText"
+                        android:layout_toRightOf="@+id/infoFragmentRevenueHeader"
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/infoFragmentBudgetText"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"                        android:layout_alignLeft="@+id/infoFragmentOverViewText"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentSpokenLanguagesHeader"
+                        android:text="Langage:"
+                        android:layout_margin="4dp"
+                        android:layout_alignBaseline="@+id/infoFragmentSpokenLanguagesText"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentSpokenLanguagesText"
+                        android:layout_toRightOf="@+id/infoFragmentRevenueHeader"
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/infoFragmentRevenueText"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"                        android:layout_alignLeft="@+id/infoFragmentOverViewText"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentReleasedHeader"
+                        android:text="Released:"
+                        android:layout_margin="4dp"
+                        android:layout_alignBaseline="@+id/infoFragmentReleasedText"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/infoFragmentReleasedText"
+                        android:layout_toRightOf="@+id/infoFragmentReleasedHeader"
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/infoFragmentSpokenLanguagesText"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"                        android:layout_alignLeft="@+id/infoFragmentOverViewText"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+            
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

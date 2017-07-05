@@ -16,7 +16,10 @@ import com.companyname.moviecat.data.MovieApiManager
 import com.companyname.moviecat.kotterknife.bindView
 import com.companyname.moviecat.models.Callback
 import com.companyname.moviecat.models.retrofit.movie_find.Movie
+import com.companyname.moviecat.models.retrofit.movie_find.SpokenLanguage
 import timber.log.Timber
+import java.text.NumberFormat
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -38,7 +41,12 @@ class InfoFragment : Fragment() {
     private val infoFragmentVoteAverageText: TextView by bindView(R.id.infoFragmentVoteAverageText)
     private val infoFragmentIMDBContainer: LinearLayout by bindView(R.id.infoFragmentIMDBContainer)
     private val infoFragmentShareContainer: LinearLayout by bindView(R.id.infoFragmentShareContainer)
-
+    private val infoFragmentOverViewText: TextView by bindView(R.id.infoFragmentOverViewText)
+    private val infoFragmentRunTimeText: TextView by bindView(R.id.infoFragmentRunTimeText)
+    private val infoFragmentBudgetText: TextView by bindView(R.id.infoFragmentBudgetText)
+    private val infoFragmentRevenueText: TextView by bindView(R.id.infoFragmentRevenueText)
+    private val infoFragmentSpokenLanguagesText: TextView by bindView(R.id.infoFragmentSpokenLanguagesText)
+    private val infoFragmentReleasedText: TextView by bindView(R.id.infoFragmentReleasedText)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,18 +91,69 @@ class InfoFragment : Fragment() {
 
         //setupGenres(movie.genres)
         //setupOriginalLanguages(movie.originalLanguage)
-        //setupSpokenLanguages(movie.spokenLanguages)
+        setupSpokenLanguages(movie.spokenLanguages)
         setupImdb(movie.imdbId)
-        //setupOverView(movie.overview)
+        setupOverView(movie.overview)
         setupVoteAverage(movie.voteAverage)
         setupVoteCount(movie.voteCount)
-        //setupRevenue(movie.revenue)
-        //setupBudget(movie.budget)
-        //setupReleaseDate(movie.releaseDate)
-        //setupRuntime(movie.runtime)
+        setupRevenue(movie.revenue)
+        setupBudget(movie.budget)
+        setupReleaseDate(movie.releaseDate)
+        setupRuntime(movie.runtime)
         //setupPopularity(movie.popularity)
         //setupHomepage(movie.homepage)
         setupShare(movie.id, movie.title)
+        //belongsToCollection
+        //tagLine
+    }
+
+    private fun setupReleaseDate(releaseDate: String?) {
+        infoFragmentReleasedText.text = releaseDate
+    }
+
+    private fun  setupSpokenLanguages(spokenLanguages: List<SpokenLanguage>?) {
+        val stringBuilder: StringBuilder = StringBuilder()
+
+        //loop through all the languages
+        if (spokenLanguages != null) {
+            for(spokenLanguage: SpokenLanguage in spokenLanguages){
+                stringBuilder.append(spokenLanguage.name)
+                stringBuilder.append(", ")
+            }
+
+            if(stringBuilder.isNotEmpty()){
+                //delete the space
+                stringBuilder.deleteCharAt(stringBuilder.length - 1 )
+
+                //delete the comma
+                stringBuilder.deleteCharAt(stringBuilder.length - 1)
+            }
+        }
+
+        infoFragmentSpokenLanguagesText.text = stringBuilder.toString()
+    }
+
+    private fun  setupBudget(budget: Int?) {
+        val locale = Locale("en", "US")
+        val currencyFormatter = NumberFormat.getCurrencyInstance(locale)
+        infoFragmentBudgetText.text = currencyFormatter.format(budget)
+    }
+
+    private fun setupRevenue(revenue: Int?) {
+        val locale = Locale("en", "US")
+        val currencyFormatter = NumberFormat.getCurrencyInstance(locale)
+        infoFragmentRevenueText.text = currencyFormatter.format(revenue)
+    }
+
+    private fun  setupRuntime(runtime: Int?) {
+        infoFragmentRunTimeText.text = java.lang.String.valueOf(runtime) + " minutes"
+    }
+
+    /**
+     * Set Overview
+     */
+    private fun  setupOverView(overview: String?) {
+        infoFragmentOverViewText.text = overview
     }
 
     /**
