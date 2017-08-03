@@ -153,7 +153,7 @@ class DetailActivity : AppCompatActivity() {
      */
     private fun setupFragmentViewPager(id: Int) {
         val adapter: DetailViewFragmentViewPagerAdapter = DetailViewFragmentViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(InfoFragment.newInstance(java.lang.String.valueOf(id)), "Information")
+        adapter.addFragment(InfoFragment.newInstance(java.lang.String.valueOf(id), movie), "Information")
         adapter.addFragment(CastAndCreditFragment.newInstance(java.lang.String.valueOf(id)), "Cast")
         adapter.addFragment(RecommendationFragment.newInstance(java.lang.String.valueOf(id)), "Recommendation")
         detailViewFragmentViewPager.adapter = adapter

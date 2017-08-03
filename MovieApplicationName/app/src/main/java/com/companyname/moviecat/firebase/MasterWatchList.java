@@ -12,30 +12,30 @@ import java.util.ArrayList;
  * Created by Joe on 6/19/2017.
  */
 
-public class MasterFavoriteList {
+public class MasterWatchList {
 
 
-    private static MasterFavoriteList instance;
+    private static MasterWatchList instance;
 
-    private static FirebaseMovieFavorites firebaseMovieFavorites;
+    private static FirebaseMovieWatched firebaseMovieWatched;
 
-    private static ArrayList<MovieSearchResults> firebaseMovieFavoritesList;
+    private static ArrayList<MovieSearchResults> firebaseMovieWatchList;
 
     private static Callback<Void> initCallback;
 
-    private MasterFavoriteList() {
+    private MasterWatchList() {
     }
 
     public static void init(final Callback<Void> callback) {
 
-        instance = new MasterFavoriteList();
+        instance = new MasterWatchList();
         initCallback = callback;
 
-        FirebaseMovieFavorites.registerForFavorites("MASTER_FAVORITE_LIST", new Callback<FirebaseMovieFavorites>() {
+        FirebaseMovieWatched.registerForWatched("MASTER_WATCHED_LIST", new Callback<FirebaseMovieWatched>() {
             @Override
-            public void success(FirebaseMovieFavorites firebaseMovieFavorites) {
-                MasterFavoriteList.firebaseMovieFavorites = firebaseMovieFavorites;
-                MasterFavoriteList.firebaseMovieFavoritesList = MapUtil.convertMapToList(firebaseMovieFavorites);
+            public void success(FirebaseMovieWatched firebaseMovieWatched) {
+                MasterWatchList.firebaseMovieWatched = firebaseMovieWatched;
+                MasterWatchList.firebaseMovieWatchList = MapUtil.convertMapToList(firebaseMovieWatched);
 
                 if (initCallback != null) {
                     initCallback.success(null);
@@ -54,26 +54,26 @@ public class MasterFavoriteList {
 
     }
 
-    public static MasterFavoriteList getInstance() {
+    public static MasterWatchList getInstance() {
         return instance;
     }
 
 
     public void save() {
-        if (firebaseMovieFavorites != null) firebaseMovieFavorites.save();
+        if (firebaseMovieWatched != null) firebaseMovieWatched.save();
     }
 
     public void add(MovieSearchResults movieSearchResults) {
-        firebaseMovieFavorites.put(String.valueOf(movieSearchResults.getId()), movieSearchResults);
-        firebaseMovieFavorites.save();
+        firebaseMovieWatched.put(String.valueOf(movieSearchResults.getId()), movieSearchResults);
+        firebaseMovieWatched.save();
     }
 
-    public FirebaseMovieFavorites getFirebaseMovieFavorites() {
-        return firebaseMovieFavorites;
+    public FirebaseMovieWatched getFirebaseMovieWatched() {
+        return firebaseMovieWatched;
     }
 
-    public ArrayList<MovieSearchResults> getFirebaseMovieFavoritesList() {
-        return firebaseMovieFavoritesList;
+    public ArrayList<MovieSearchResults> getFirebaseMovieWatchList() {
+        return firebaseMovieWatchList;
     }
 
 

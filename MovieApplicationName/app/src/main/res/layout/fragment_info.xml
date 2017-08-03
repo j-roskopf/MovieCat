@@ -53,6 +53,7 @@
                 <LinearLayout
                     android:clickable="true"
                     android:focusable="true"
+                    android:id="@+id/infoFragmentWatchedContainer"
                     android:background="@drawable/ripple"
                     android:orientation="vertical"
                     android:layout_weight="1"

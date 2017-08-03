@@ -13,8 +13,10 @@ import android.widget.Toast
 import com.companyname.movieapplicationname.R
 import com.companyname.moviecat.data.Const
 import com.companyname.moviecat.data.MovieApiManager
+import com.companyname.moviecat.firebase.MasterWatchList
 import com.companyname.moviecat.kotterknife.bindView
 import com.companyname.moviecat.models.Callback
+import com.companyname.moviecat.models.MovieSearchResults
 import com.companyname.moviecat.models.retrofit.movie_find.Movie
 import com.companyname.moviecat.models.retrofit.movie_find.SpokenLanguage
 import timber.log.Timber
@@ -33,6 +35,7 @@ class InfoFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var movieId: String? = null
+    private var movieSearchResult: MovieSearchResults? = null
 
     /**
      * UI
@@ -41,6 +44,7 @@ class InfoFragment : Fragment() {
     private val infoFragmentVoteAverageText: TextView by bindView(R.id.infoFragmentVoteAverageText)
     private val infoFragmentIMDBContainer: LinearLayout by bindView(R.id.infoFragmentIMDBContainer)
     private val infoFragmentShareContainer: LinearLayout by bindView(R.id.infoFragmentShareContainer)
+    private val infoFragmentWatchedContainer: LinearLayout by bindView(R.id.infoFragmentWatchedContainer)
     private val infoFragmentOverViewText: TextView by bindView(R.id.infoFragmentOverViewText)
     private val infoFragmentRunTimeText: TextView by bindView(R.id.infoFragmentRunTimeText)
     private val infoFragmentBudgetText: TextView by bindView(R.id.infoFragmentBudgetText)
@@ -52,6 +56,7 @@ class InfoFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             movieId = arguments.getString(MOVIE_ID)
+            movieSearchResult = arguments.getParcelable(MOVIE)
         }
     }
 
@@ -93,6 +98,7 @@ class InfoFragment : Fragment() {
         //setupOriginalLanguages(movie.originalLanguage)
         setupSpokenLanguages(movie.spokenLanguages)
         setupImdb(movie.imdbId)
+        setupWatchedButton()
         setupOverView(movie.overview)
         setupVoteAverage(movie.voteAverage)
         setupVoteCount(movie.voteCount)
@@ -105,6 +111,12 @@ class InfoFragment : Fragment() {
         setupShare(movie.id, movie.title)
         //belongsToCollection
         //tagLine
+    }
+
+    private fun setupWatchedButton(){
+        infoFragmentWatchedContainer.setOnClickListener {
+            MasterWatchList.getInstance().add(movieSearchResult)
+        }
     }
 
     private fun setupReleaseDate(releaseDate: String?) {
@@ -216,6 +228,7 @@ class InfoFragment : Fragment() {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private val MOVIE_ID = "movie_id"
+        private val MOVIE = "movie"
 
         /**
          * Use this factory method to create a new instance of
@@ -228,10 +241,11 @@ class InfoFragment : Fragment() {
          * @return A new instance of fragment InfoFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(movieId: String): InfoFragment {
+        fun newInstance(movieId: String, movie: MovieSearchResults): InfoFragment {
             val fragment = InfoFragment()
             val args = Bundle()
             args.putString(MOVIE_ID, movieId)
+            args.putParcelable(MOVIE, movie)
             fragment.arguments = args
             return fragment
         }

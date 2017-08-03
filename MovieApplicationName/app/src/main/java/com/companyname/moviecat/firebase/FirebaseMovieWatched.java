@@ -21,31 +21,31 @@ import timber.log.Timber;
  * Created by Joe on 3/26/2017.
  */
 
-public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
-    private static String TAG = "FAVORITES";
-    private static String FB_NODE = "favorites";
+public class FirebaseMovieWatched extends HashMap<String,MovieSearchResults>{
+    private static String TAG = "WATCHED";
+    private static String FB_NODE = "watched";
 
     private static HashMap<String,ValueEventListener> registeredListeners = new HashMap<String,ValueEventListener>(1);
 
     private String userId;
 
-    public FirebaseMovieFavorites(){
+    public FirebaseMovieWatched(){
         //Empty for firebase
     }
 
-    private FirebaseMovieFavorites(HashMap<String, MovieSearchResults> events) {
+    private FirebaseMovieWatched(HashMap<String, MovieSearchResults> events) {
         super(events);
     }
 
     /**
-     * Register to receive the Movie Favorites as they are updated.
+     * Register to receive the Movie Watched as they are updated.
      *
      * @param registrationId unique registration ID to track the callback
-     * @param callback callback object with success method to return MovioeFavorites as it is updated
+     * @param callback callback object with success method to return movieWatched as it is updated
      *                 or failure messages as they occur.
      */
 
-    public static void registerForFavorites(final String registrationId, final Callback<FirebaseMovieFavorites> callback) {
+    public static void registerForWatched(final String registrationId, final Callback<FirebaseMovieWatched> callback) {
 
         //Get the current user id:
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -58,7 +58,7 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
         }
         else {
 
-            registerForFavorites(registrationId,firebaseUser,callback);
+            registerForWatched(registrationId,firebaseUser,callback);
         }
 
     }
@@ -68,7 +68,7 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
      * @param registrationId
      */
 
-    public static void deregisterFavoritesForCurrentUser(final String registrationId) {
+    public static void deregisterWatchedForCurrentUser(final String registrationId) {
 
         // Pull the listener:
         ValueEventListener listener = registeredListeners.remove(registrationId);
@@ -99,27 +99,11 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
     }
 
 
-    public int removeItemAndReturnPosition(Object o){
-        int positionRemoved = -1;
-        MovieSearchResults movieSearchResults = (MovieSearchResults)o;
-        for(int i = 0; i < this.size(); i++){
-            MovieSearchResults msr = this.get(i);
-            if(msr.getId().equals(movieSearchResults.getId())){
-                remove(i);
-                positionRemoved = i;
-                break;
-            }
-        }
-
-        save();
-        return positionRemoved;
-    }
-
    /*
      * Private worker methods
      */
 
-    private static void registerForFavorites(final String registrationId, final FirebaseUser firebaseUser, final Callback<FirebaseMovieFavorites> callback) {
+    private static void registerForWatched(final String registrationId, final FirebaseUser firebaseUser, final Callback<FirebaseMovieWatched> callback) {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
         // Instantiate our new listener:
@@ -135,23 +119,23 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
                 GenericTypeIndicator<HashMap<String, MovieSearchResults>> t = new GenericTypeIndicator<HashMap<String, MovieSearchResults>>() {};
 
                 HashMap<String, MovieSearchResults> list = dataSnapshot.getValue(t);
-                FirebaseMovieFavorites firebaseMovieFavorites;
+                FirebaseMovieWatched firebaseMovieWatched;
 
                 if (list == null) {
-                    firebaseMovieFavorites = new FirebaseMovieFavorites();
+                    firebaseMovieWatched = new FirebaseMovieWatched();
                     dirtyList = true;
                 }
                 else {
-                    firebaseMovieFavorites = new FirebaseMovieFavorites(list);
+                    firebaseMovieWatched = new FirebaseMovieWatched(list);
                 }
 
-                firebaseMovieFavorites.userId = firebaseUser.getUid();
+                firebaseMovieWatched.userId = firebaseUser.getUid();
 
                 if (dirtyList) {
-                    firebaseMovieFavorites.save();
+                    firebaseMovieWatched.save();
                 }
 
-                callback.success(firebaseMovieFavorites);
+                callback.success(firebaseMovieWatched);
             }
 
             @Override

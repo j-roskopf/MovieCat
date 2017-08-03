@@ -31,6 +31,7 @@ import com.companyname.moviecat.firebase.FirebaseMovieLists;
 import com.companyname.moviecat.firebase.MasterFavoriteList;
 import com.companyname.moviecat.firebase.MasterRatingsList;
 import com.companyname.moviecat.firebase.MasterUserList;
+import com.companyname.moviecat.firebase.MasterWatchList;
 import com.companyname.moviecat.fragments.FavoritesFragment;
 import com.companyname.moviecat.fragments.HomeFragment;
 import com.companyname.moviecat.fragments.ListViewFragment;
@@ -178,6 +179,18 @@ public class MainActivity extends BaseActivity {
             @Override
             public void success(Void aVoid) {
                 setupSlideRecyclerView();
+            }
+
+            @Override
+            public void failure(@Nullable String message) {
+
+            }
+        });
+
+        MasterWatchList.init(new Callback<Void>() {
+            @Override
+            public void success(Void aVoid) {
+
             }
 
             @Override
