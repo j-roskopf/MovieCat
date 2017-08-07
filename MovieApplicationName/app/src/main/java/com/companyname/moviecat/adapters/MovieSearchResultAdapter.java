@@ -23,9 +23,9 @@ import com.bumptech.glide.Glide;
 import com.companyname.movieapplicationname.R;
 import com.companyname.moviecat.activities.DetailActivity;
 import com.companyname.moviecat.data.Const;
-import com.companyname.moviecat.events.MovieRatingEvent;
 import com.companyname.moviecat.events.RatingListEvent;
 import com.companyname.moviecat.firebase.MasterFavoriteList;
+import com.companyname.moviecat.firebase.MasterRatingsList;
 import com.companyname.moviecat.models.MovieSearchResults;
 import com.companyname.moviecat.util.ListUtil;
 import com.varunest.sparkbutton.SparkButton;
@@ -39,6 +39,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
+import timber.log.Timber;
 
 public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchResultAdapter.MovieResultViewHolder> {
 
@@ -286,12 +287,16 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     movieItemRate.setChecked(true);
                                     movie.setUserRating(ratingBar.getRating());
-                                    EventBus.getDefault().post(new MovieRatingEvent(movie));
+                                    addRating(movie);
                                 }
                             })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    movieItemRate.setChecked(false);
+                                    if (ListUtil.movieInList(firebaseMovieRatings, movie)) {
+                                        movieItemRate.setChecked(true);
+                                    } else {
+                                        movieItemRate.setChecked(false);
+                                    }
                                 }
                             }).create();
 
@@ -306,6 +311,26 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         }
 
 
+    }
+
+    public void addRating(MovieSearchResults movieSearchResults) {
+        Timber.d("onMessageEvent MainActivity with movieRatingEvent");
+
+        if(MasterRatingsList.getInstance().getFirebaseMovieRatingsList() != null){
+            if(!ListUtil.movieInList(MasterRatingsList.getInstance().getFirebaseMovieRatingsList(), movieSearchResults)){
+                Timber.d("onMessageEvent MainActivity with movieRatingEvent not in list");
+
+                MasterRatingsList.getInstance().getFirebaseMovieFavorites().add(movieSearchResults);
+                MasterRatingsList.getInstance().getFirebaseMovieFavorites().save();
+            }else{
+                Timber.d("onMessageEvent MainActivity with movieRatingEvent in list");
+
+                ListUtil.updateRating(MasterRatingsList.getInstance().getFirebaseMovieRatingsList(), movieSearchResults);
+
+                //the event is already updated in the list. just save it.
+                MasterRatingsList.getInstance().getFirebaseMovieFavorites().save();
+            }
+        }
     }
 
 

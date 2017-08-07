@@ -256,6 +256,11 @@ public class MainActivity extends BaseActivity {
         String username = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
+        //now playing
+        //popular
+        //top rated
+        //upcoming
+
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.material_background)

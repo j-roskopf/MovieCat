@@ -76,5 +76,16 @@ public class MasterFavoriteList {
         return firebaseMovieFavoritesList;
     }
 
+    public boolean isMovieFavorited(int id) {
+        for(MovieSearchResults movieSearchResults: getFirebaseMovieFavoritesList()) {
+            if(movieSearchResults.getId() == id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 
 }

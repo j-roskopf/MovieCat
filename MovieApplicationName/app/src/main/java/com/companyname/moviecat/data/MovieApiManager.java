@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.companyname.moviecat.fragments.HomeFragment;
 import com.companyname.moviecat.models.MovieSearchResultsList;
+import com.companyname.moviecat.models.ReviewResults;
 import com.companyname.moviecat.models.retrofit.movie_find.CastAndCredits;
 import com.companyname.moviecat.models.retrofit.movie_find.Movie;
 import com.companyname.moviecat.models.retrofit.movie_find.MovieImage;
@@ -74,8 +75,14 @@ public class MovieApiManager {
         @GET("/3/movie/{id}/recommendations")
         Call<Recommendation> getMovieRecommendations(@Path("id") String id, @Query("api_key") String api_key);
 
+        @GET("/3/movie/{id}/similar")
+        Call<MovieSearchResultsList> getSimilarMovies(@Path("id") String id, @Query("api_key") String api_key);
+
         @GET("/3/movie/{id}/credits")
         Call<CastAndCredits> getCastAndCredits(@Path("id") String id, @Query("api_key") String api_key);
+
+        @GET("/3/movie/{id}/reviews")
+        Call<ReviewResults> getReviews(@Path("id") String id, @Query("api_key") String api_key);
     }
 
     /**
@@ -179,6 +186,32 @@ public class MovieApiManager {
     }
 
     /**
+     * Get movie recommendations
+     *
+     * @param id
+     */
+    public void getSimilarMovies(String id, final com.companyname.moviecat.models.Callback<MovieSearchResultsList> movieCallback) {
+        try {
+            String encodedId = URLEncoder.encode(id, "UTF-8");
+            Timber.d("resultDebug calling images find by id");
+            movieService.getSimilarMovies(encodedId, Const.API_KEY).enqueue(new Callback<MovieSearchResultsList>() {
+                @Override
+                public void onResponse(Call<MovieSearchResultsList> call, Response<MovieSearchResultsList> response) {
+                    movieCallback.success(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<MovieSearchResultsList> call, Throwable t) {
+                    movieCallback.failure(t.getLocalizedMessage());
+                }
+            });
+
+        } catch (UnsupportedEncodingException e) {
+            Timber.d("resultDebug with exception = " + e.getLocalizedMessage());
+        }
+    }
+
+    /**
      * Get movie cast and credits
      *
      * @param id
@@ -196,6 +229,25 @@ public class MovieApiManager {
             }
         });
 
+    }
+
+    /**
+     * Get movie cast and credits
+     *
+     * @param id
+     */
+    public void getReviews(String id, final com.companyname.moviecat.models.Callback<ReviewResults> reviewResultsCallback) {
+        movieService.getReviews(id, Const.API_KEY).enqueue(new Callback<ReviewResults>() {
+            @Override
+            public void onResponse(Call<ReviewResults> call, Response<ReviewResults> response) {
+                reviewResultsCallback.success(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ReviewResults> call, Throwable t) {
+                reviewResultsCallback.failure(t.getLocalizedMessage());
+            }
+        });
 
     }
 }

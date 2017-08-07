@@ -68,6 +68,11 @@ public class MasterWatchList {
         firebaseMovieWatched.save();
     }
 
+    public void remove(MovieSearchResults movieSearchResults) {
+        firebaseMovieWatched.remove(String.valueOf(movieSearchResults.getId()));
+        firebaseMovieWatched.save();
+    }
+
     public FirebaseMovieWatched getFirebaseMovieWatched() {
         return firebaseMovieWatched;
     }

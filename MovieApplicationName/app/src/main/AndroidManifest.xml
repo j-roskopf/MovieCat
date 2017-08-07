@@ -24,7 +24,9 @@
         <activity android:name="com.companyname.moviecat.activities.ForgotPasswordActivity" />
         <activity android:name="com.companyname.moviecat.activities.KotlinActivity" />
         <activity android:name="com.companyname.moviecat.activities.DetailActivity" />
-        <activity android:name="com.companyname.moviecat.activities.DetailImageViewActivity"/>
+        <activity android:name="com.companyname.moviecat.activities.DetailImageViewActivity" />
+        <activity android:name="com.companyname.moviecat.activities.SimilarViewActivity" />
+        <activity android:name="com.companyname.moviecat.activities.ReviewsViewActivity"></activity>
     </application>
 
 </manifest>

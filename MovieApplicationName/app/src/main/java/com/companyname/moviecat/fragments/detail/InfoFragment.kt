@@ -4,15 +4,20 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.companyname.movieapplicationname.R
+import com.companyname.moviecat.activities.ReviewsViewActivity
+import com.companyname.moviecat.activities.SimilarViewActivity
 import com.companyname.moviecat.data.Const
 import com.companyname.moviecat.data.MovieApiManager
+import com.companyname.moviecat.firebase.MasterFavoriteList
 import com.companyname.moviecat.firebase.MasterWatchList
 import com.companyname.moviecat.kotterknife.bindView
 import com.companyname.moviecat.models.Callback
@@ -45,12 +50,19 @@ class InfoFragment : Fragment() {
     private val infoFragmentIMDBContainer: LinearLayout by bindView(R.id.infoFragmentIMDBContainer)
     private val infoFragmentShareContainer: LinearLayout by bindView(R.id.infoFragmentShareContainer)
     private val infoFragmentWatchedContainer: LinearLayout by bindView(R.id.infoFragmentWatchedContainer)
+    private val infoFragmentSimilarContainer: LinearLayout by bindView(R.id.infoFragmentSimilarContainer)
+    private val infoFragmentFavoriteContainer: LinearLayout by bindView(R.id.infoFragmentFavoriteContainer)
+    private val infoFragmentReviewContainer: LinearLayout by bindView(R.id.infoFragmentReviewContainer)
     private val infoFragmentOverViewText: TextView by bindView(R.id.infoFragmentOverViewText)
     private val infoFragmentRunTimeText: TextView by bindView(R.id.infoFragmentRunTimeText)
     private val infoFragmentBudgetText: TextView by bindView(R.id.infoFragmentBudgetText)
     private val infoFragmentRevenueText: TextView by bindView(R.id.infoFragmentRevenueText)
     private val infoFragmentSpokenLanguagesText: TextView by bindView(R.id.infoFragmentSpokenLanguagesText)
     private val infoFragmentReleasedText: TextView by bindView(R.id.infoFragmentReleasedText)
+    private val infoFragmentWatchedText: TextView by bindView(R.id.infoFragmentWatchedText)
+    private val infoFragmentFavoriteText: TextView by bindView(R.id.infoFragmentFavoriteText)
+    private val infoFragmentWatchedIcon: ImageView by bindView(R.id.infoFragmentWatchedIcon)
+    private val infoFragmentFavoriteImage: ImageView by bindView(R.id.infoFragmentFavoriteImage)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,6 +108,10 @@ class InfoFragment : Fragment() {
 
         //setupGenres(movie.genres)
         //setupOriginalLanguages(movie.originalLanguage)
+        //setupVideo
+        setupFavoriteLogic()
+        setupReviewButton(movie.id)
+        setupSimilarButton(movie.id)
         setupSpokenLanguages(movie.spokenLanguages)
         setupImdb(movie.imdbId)
         setupWatchedButton()
@@ -113,9 +129,101 @@ class InfoFragment : Fragment() {
         //tagLine
     }
 
-    private fun setupWatchedButton(){
+    private fun setupFavoriteLogic() {
+        Timber.d("favoriteDebug")
+        infoFragmentFavoriteContainer.setOnClickListener {
+
+            if(!movieFavorited(movieSearchResult?.id ?: 0)){
+                Timber.d("favoriteDebug is not favorited but is now")
+                MasterFavoriteList.getInstance().firebaseMovieFavorites.add(movieSearchResult)
+                MasterFavoriteList.getInstance().firebaseMovieFavorites.save()
+
+                //set to fav state automatically.
+                infoFragmentFavoriteImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_red_500_48dp))
+                infoFragmentFavoriteText.text = "Favorited!"
+
+            }else {
+                Timber.d("favoriteDebug movie is favorited but now isnt")
+                (0..MasterFavoriteList.getInstance().firebaseMovieFavoritesList.size - 1)
+                        .map { MasterFavoriteList.getInstance().firebaseMovieFavoritesList[it] }
+                        .filter { it.id == movieSearchResult?.id }
+                        .forEach { MasterFavoriteList.getInstance().firebaseMovieFavorites.remove(it.id.toString())}
+
+                MasterFavoriteList.getInstance().save()
+
+                //set to un fav state
+                infoFragmentFavoriteImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_black_48dp))
+                infoFragmentFavoriteText.text = "Favorite?"
+            }
+        }
+
+        setFavoriteButtonState()
+    }
+
+    private fun setFavoriteButtonState(){
+        if(!movieFavorited(movieSearchResult?.id ?: 0)) {
+            Timber.d("favoriteDebug in state set - not favorited " + movieSearchResult?.id)
+            //not favorited - set logic to prompt the user to favorite it
+            infoFragmentFavoriteImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_black_48dp))
+            infoFragmentFavoriteText.text = "Favorite?"
+        }else{
+            Timber.d("favoriteDebug in state set - favorited " + movieSearchResult?.id)
+
+            infoFragmentFavoriteImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_red_500_48dp))
+            infoFragmentFavoriteText.text = "Favorited!"
+        }
+    }
+
+    private fun movieFavorited(id: Int):Boolean {
+        return MasterFavoriteList.getInstance().isMovieFavorited(id)
+    }
+
+    private fun setupReviewButton(id: Int?) {
+        infoFragmentReviewContainer.setOnClickListener {
+            var intent: Intent = Intent(activity, ReviewsViewActivity::class.java)
+            intent.putExtra(MOVIE_ID, java.lang.String.valueOf(id))
+            startActivity(intent)
+        }
+    }
+
+    private fun setupSimilarButton(id: Int?) {
+        //Just kick them over to the similar activity
+
+        infoFragmentSimilarContainer.setOnClickListener {
+            var intent: Intent = Intent(activity, SimilarViewActivity::class.java)
+            intent.putExtra(MOVIE_ID, java.lang.String.valueOf(id))
+            startActivity(intent)
+        }
+
+    }
+
+    private fun setupWatchedButton() {
         infoFragmentWatchedContainer.setOnClickListener {
-            MasterWatchList.getInstance().add(movieSearchResult)
+            if(movieWatched()){
+                Timber.d("watchedDebug removing")
+                MasterWatchList.getInstance().remove(movieSearchResult)
+            }else{
+                Timber.d("watchedDebug adding")
+                MasterWatchList.getInstance().add(movieSearchResult)
+            }
+            setWatchedButtonState()
+        }
+
+        setWatchedButtonState()
+    }
+
+    private fun movieWatched(): Boolean {
+        return !(MasterWatchList.getInstance().firebaseMovieWatched[java.lang.String.valueOf(movieSearchResult?.id)] == null)
+
+    }
+
+    private fun setWatchedButtonState() {
+        if(!movieWatched()) {
+            infoFragmentWatchedText.text = "Watched?"
+            infoFragmentWatchedIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_help_outline_black_24dp))
+        }else{
+            infoFragmentWatchedText.text = "Watched!"
+            infoFragmentWatchedIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check_black_24dp))
         }
     }
 
@@ -184,7 +292,7 @@ class InfoFragment : Fragment() {
     /**
      * Set onclick for imdb icon
      */
-    private fun  setupImdb(imdbId: String?) {
+    private fun setupImdb(imdbId: String?) {
         try {
             infoFragmentIMDBContainer.setOnClickListener(View.OnClickListener {
                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Const.IMDB_URL + imdbId)))
@@ -227,7 +335,7 @@ class InfoFragment : Fragment() {
     companion object {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val MOVIE_ID = "movie_id"
+        val MOVIE_ID = "movie_id"
         private val MOVIE = "movie"
 
         /**

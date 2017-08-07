@@ -63,12 +63,12 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:src="@drawable/ic_help_outline_black_24dp"
+                        android:id="@+id/infoFragmentWatchedIcon"
                         android:layout_width="24dp"
                         android:layout_height="24dp" />
 
                     <TextView
-                        android:text="Watched"
+                        android:id="@+id/infoFragmentWatchedText"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -84,15 +84,16 @@
                     android:layout_margin="8dp"
                     android:gravity="center"
                     android:layout_width="0dp"
+                    android:id="@+id/infoFragmentFavoriteContainer"
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:src="@drawable/ic_favorite_red_500_18dp"
                         android:layout_width="24dp"
+                        android:id="@+id/infoFragmentFavoriteImage"
                         android:layout_height="24dp" />
 
                     <TextView
-                        android:text="Favorite"
+                        android:id="@+id/infoFragmentFavoriteText"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -163,6 +164,7 @@
                     android:focusable="true"
                     android:background="@drawable/ripple"
                     android:orientation="vertical"
+                    android:id="@+id/infoFragmentSimilarContainer"
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:gravity="center"
@@ -190,6 +192,7 @@
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:gravity="center"
+                    android:id="@+id/infoFragmentReviewContainer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
 
