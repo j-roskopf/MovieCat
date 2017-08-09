@@ -36,6 +36,7 @@ import com.companyname.moviecat.fragments.FavoritesFragment;
 import com.companyname.moviecat.fragments.HomeFragment;
 import com.companyname.moviecat.fragments.ListViewFragment;
 import com.companyname.moviecat.fragments.MyListFragment;
+import com.companyname.moviecat.fragments.WatchedFragment;
 import com.companyname.moviecat.models.Callback;
 import com.companyname.moviecat.models.MovieSearchResults;
 import com.companyname.moviecat.util.ListUtil;
@@ -106,6 +107,7 @@ public class MainActivity extends BaseActivity {
      */
     private HomeFragment homeFragment = new HomeFragment();
     private FavoritesFragment favoritesFragment = new FavoritesFragment();
+    private WatchedFragment watchedFragment = new WatchedFragment();
     private MyListFragment myListFragment = new MyListFragment();
     private ListViewFragment listViewFragment = new ListViewFragment();
 
@@ -351,6 +353,11 @@ public class MainActivity extends BaseActivity {
                                 break;
                             case LOGOUT_ITEM_ID:
                                 logoutUser();
+                                break;
+                            case WATCH_LIST_ITEM_ID:
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.container, watchedFragment)
+                                        .commit();
                                 break;
                         }
 

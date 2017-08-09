@@ -109,8 +109,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
             setRatingLogic(movie);
             setCardOnClick(movie);
 
-            if (!comingFromFavorites)
-                setupAddButton(movie);
+            setupAddButton(movie);
         }
 
         /**
@@ -313,7 +312,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
 
     }
 
-    public void addRating(MovieSearchResults movieSearchResults) {
+    private void addRating(MovieSearchResults movieSearchResults) {
         Timber.d("onMessageEvent MainActivity with movieRatingEvent");
 
         if(MasterRatingsList.getInstance().getFirebaseMovieRatingsList() != null){
