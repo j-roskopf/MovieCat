@@ -19,6 +19,7 @@ import com.companyname.moviecat.firebase.FirebaseMovieFavorites;
 import com.companyname.moviecat.firebase.MasterFavoriteList;
 import com.companyname.moviecat.firebase.MasterRatingsList;
 import com.companyname.moviecat.models.Callback;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +42,13 @@ public class FavoritesFragment extends Fragment {
         this.setAllowEnterTransitionOverlap(false);
         this.setAllowReturnTransitionOverlap(false);
         this.setExitTransition(CatTransition.slideFromRight());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        FirebaseAnalytics.getInstance(getActivity()).setCurrentScreen(getActivity(), "FavoritesFragment", null /* class override */);
     }
 
     @Override

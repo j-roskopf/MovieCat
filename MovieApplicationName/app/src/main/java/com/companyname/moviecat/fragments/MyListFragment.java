@@ -26,6 +26,7 @@ import com.companyname.moviecat.firebase.MasterUserList;
 import com.companyname.moviecat.models.Callback;
 import com.companyname.moviecat.models.UserList;
 import com.companyname.moviecat.util.MapUtil;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -50,6 +51,13 @@ public class MyListFragment extends Fragment {
     RecyclerView myListRecyclerView;
 
     ArrayList<UserList> firebaseMovieLists;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        FirebaseAnalytics.getInstance(getActivity()).setCurrentScreen(getActivity(), "MyListFragment", null /* class override */);
+    }
 
     public MyListFragment() {
         this.setEnterTransition(CatTransition.slideFromLeft());

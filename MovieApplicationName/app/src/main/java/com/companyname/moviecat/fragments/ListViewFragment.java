@@ -1,6 +1,7 @@
 package com.companyname.moviecat.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.companyname.moviecat.firebase.MasterFavoriteList;
 import com.companyname.moviecat.firebase.MasterRatingsList;
 import com.companyname.moviecat.models.UserList;
 import com.companyname.moviecat.util.MapUtil;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +45,13 @@ public class ListViewFragment extends Fragment {
         this.setAllowEnterTransitionOverlap(false);
         this.setAllowReturnTransitionOverlap(false);
         this.setExitTransition(CatTransition.slideFromRight());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        FirebaseAnalytics.getInstance(getActivity()).setCurrentScreen(getActivity(), "ListViewFragment", null /* class override */);
     }
 
     @Override

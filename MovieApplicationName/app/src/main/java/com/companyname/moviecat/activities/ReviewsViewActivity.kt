@@ -12,6 +12,7 @@ import com.companyname.moviecat.fragments.detail.InfoFragment
 import com.companyname.moviecat.kotterknife.bindView
 import com.companyname.moviecat.models.Callback
 import com.companyname.moviecat.models.ReviewResults
+import com.google.firebase.analytics.FirebaseAnalytics
 import nl.komponents.kovenant.Promise
 import nl.komponents.kovenant.deferred
 
@@ -25,6 +26,9 @@ class ReviewsViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reviews_view)
+
+        FirebaseAnalytics.getInstance(this).setCurrentScreen(this, "ReviewViewsActivity", null /* class override */)
+
 
         ButterKnife.bind(this)
 

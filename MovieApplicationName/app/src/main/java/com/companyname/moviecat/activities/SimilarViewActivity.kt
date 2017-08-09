@@ -23,6 +23,7 @@ import com.companyname.moviecat.models.Callback
 import com.companyname.moviecat.models.MovieSearchResults
 import com.companyname.moviecat.models.MovieSearchResultsList
 import com.companyname.moviecat.util.ListUtil
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.mancj.slideup.SlideUp
 import kotlinx.android.synthetic.main.rating_view.*
 import nl.komponents.kovenant.Promise
@@ -47,6 +48,8 @@ class SimilarViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_similar_view)
         ButterKnife.bind(this)
+
+        FirebaseAnalytics.getInstance(this).setCurrentScreen(this, "SimilarViewActivity", null /* class override */)
 
         if(intent.extras.containsKey(InfoFragment.Companion.MOVIE_ID)){
             val movieApiManager: MovieApiManager = MovieApiManager(this)

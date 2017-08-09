@@ -24,6 +24,7 @@ import com.companyname.moviecat.models.Callback
 import com.companyname.moviecat.models.MovieSearchResults
 import com.companyname.moviecat.models.retrofit.movie_find.Movie
 import com.companyname.moviecat.models.retrofit.movie_find.SpokenLanguage
+import com.google.firebase.analytics.FirebaseAnalytics
 import timber.log.Timber
 import java.text.NumberFormat
 import java.util.*
@@ -70,6 +71,8 @@ class InfoFragment : Fragment() {
             movieId = arguments.getString(MOVIE_ID)
             movieSearchResult = arguments.getParcelable(MOVIE)
         }
+
+        FirebaseAnalytics.getInstance(activity).setCurrentScreen(activity, "InfoFragment", null /* class override */)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,

@@ -35,6 +35,7 @@ import com.companyname.moviecat.models.retrofit.movie_find.Backdrop
 import com.companyname.moviecat.models.retrofit.movie_find.Image
 import com.companyname.moviecat.models.retrofit.movie_find.Poster
 import com.companyname.moviecat.util.ListUtil
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.mancj.slideup.SlideUp
 import kotlinx.android.synthetic.main.rating_view.*
 import me.relex.circleindicator.CircleIndicator
@@ -67,6 +68,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         ButterKnife.bind(this)
+
+        FirebaseAnalytics.getInstance(this).setCurrentScreen(this, "DetailViewActivity", null /* class override */)
 
         context = this
 

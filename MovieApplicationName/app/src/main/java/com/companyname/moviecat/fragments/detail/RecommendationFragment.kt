@@ -21,6 +21,7 @@ import com.companyname.moviecat.kotterknife.bindView
 import com.companyname.moviecat.models.Callback
 import com.companyname.moviecat.models.MovieSearchResults
 import com.companyname.moviecat.models.retrofit.movie_find.Recommendation
+import com.google.firebase.analytics.FirebaseAnalytics
 import nl.komponents.kovenant.Promise
 import nl.komponents.kovenant.deferred
 import timber.log.Timber
@@ -46,6 +47,9 @@ class RecommendationFragment : Fragment() {
         if (arguments != null) {
             movieId = arguments.getString(MOVIE_ID)
         }
+
+        FirebaseAnalytics.getInstance(activity).setCurrentScreen(activity, "RecommendationFragment", null /* class override */)
+
     }
 
     override fun onResume() {

@@ -15,6 +15,7 @@ import com.companyname.moviecat.firebase.MasterFavoriteList
 import com.companyname.moviecat.firebase.MasterRatingsList
 import com.companyname.moviecat.firebase.MasterWatchList
 import com.companyname.moviecat.models.MovieSearchResults
+import com.google.firebase.analytics.FirebaseAnalytics
 import java.util.*
 
 /**
@@ -29,6 +30,13 @@ class WatchedFragment : Fragment() {
 
     private lateinit var watchedRecyclerView: RecyclerView
     private lateinit var watchedNoWatchedContainer: RelativeLayout
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        FirebaseAnalytics.getInstance(activity).setCurrentScreen(activity, "WatchedFragment", null /* class override */)
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

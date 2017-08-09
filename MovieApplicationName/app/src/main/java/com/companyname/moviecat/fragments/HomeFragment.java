@@ -2,6 +2,7 @@ package com.companyname.moviecat.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ import com.companyname.moviecat.firebase.MasterFavoriteList;
 import com.companyname.moviecat.firebase.MasterRatingsList;
 import com.companyname.moviecat.models.MovieSearchResults;
 import com.companyname.moviecat.models.MovieSearchResultsList;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -61,6 +63,13 @@ public class HomeFragment extends Fragment {
         this.setAllowEnterTransitionOverlap(false);
         this.setAllowReturnTransitionOverlap(false);
         this.setExitTransition(CatTransition.slideFromRight());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        FirebaseAnalytics.getInstance(getActivity()).setCurrentScreen(getActivity(), "HomeFragment", null /* class override */);
     }
 
     @Override

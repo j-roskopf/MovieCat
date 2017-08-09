@@ -16,6 +16,7 @@ import com.companyname.moviecat.models.retrofit.movie_find.Cast
 import com.companyname.moviecat.models.retrofit.movie_find.CastAndCredits
 import com.companyname.moviecat.models.retrofit.movie_find.Crew
 import com.companyname.moviecat.models.retrofit.movie_find.Person
+import com.google.firebase.analytics.FirebaseAnalytics
 
 /**
  * A simple [Fragment] subclass.
@@ -37,6 +38,8 @@ class CastAndCreditFragment : Fragment() {
         if (arguments != null) {
             movieId = arguments.getString(MOVIE_ID)
         }
+
+        FirebaseAnalytics.getInstance(activity).setCurrentScreen(activity, "CastAndCreditsFragment", null /* class override */)
     }
 
 
