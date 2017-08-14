@@ -3,7 +3,7 @@ package com.companyname.moviecat.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
-import com.companyname.movieapplicationname.R
+import com.moviecat.joe.R
 
 class KotlinActivity : AppCompatActivity() {
 

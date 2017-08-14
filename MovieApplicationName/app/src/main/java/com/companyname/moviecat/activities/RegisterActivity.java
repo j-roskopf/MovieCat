@@ -9,12 +9,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.companyname.movieapplicationname.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.moviecat.joe.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,9 +47,6 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-
-        FirebaseAnalytics.getInstance(this).setCurrentScreen(this, "RegisterActivity", null /* class override */);
-
 
         initVars();
     }

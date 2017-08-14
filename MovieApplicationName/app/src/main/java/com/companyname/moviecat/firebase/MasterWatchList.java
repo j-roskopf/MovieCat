@@ -31,6 +31,9 @@ public class MasterWatchList {
         instance = new MasterWatchList();
         initCallback = callback;
 
+        firebaseMovieWatched = new FirebaseMovieWatched();
+        firebaseMovieWatchList = new ArrayList<>();
+
         FirebaseMovieWatched.registerForWatched("MASTER_WATCHED_LIST", new Callback<FirebaseMovieWatched>() {
             @Override
             public void success(FirebaseMovieWatched firebaseMovieWatched) {

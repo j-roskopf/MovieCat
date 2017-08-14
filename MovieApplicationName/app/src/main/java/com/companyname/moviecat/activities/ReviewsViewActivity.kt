@@ -5,14 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import butterknife.ButterKnife
-import com.companyname.movieapplicationname.R
 import com.companyname.moviecat.adapters.ReviewAdapter
 import com.companyname.moviecat.data.MovieApiManager
 import com.companyname.moviecat.fragments.detail.InfoFragment
 import com.companyname.moviecat.kotterknife.bindView
 import com.companyname.moviecat.models.Callback
 import com.companyname.moviecat.models.ReviewResults
-import com.google.firebase.analytics.FirebaseAnalytics
+import com.moviecat.joe.R
 import nl.komponents.kovenant.Promise
 import nl.komponents.kovenant.deferred
 
@@ -27,15 +26,12 @@ class ReviewsViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reviews_view)
 
-        FirebaseAnalytics.getInstance(this).setCurrentScreen(this, "ReviewViewsActivity", null /* class override */)
-
-
         ButterKnife.bind(this)
 
-        if(intent.extras.containsKey(InfoFragment.Companion.MOVIE_ID)){
+        if(intent.extras.containsKey(InfoFragment.MOVIE_ID)){
             val movieApiManager: MovieApiManager = MovieApiManager(this)
 
-            movieId = intent.extras[InfoFragment.Companion.MOVIE_ID] as String
+            movieId = intent.extras[InfoFragment.MOVIE_ID] as String
 
             fetchReviews(movieApiManager)
 

@@ -1,9 +1,12 @@
 package com.companyname.moviecat.firebase;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.companyname.moviecat.models.Callback;
 import com.companyname.moviecat.models.MovieSearchResults;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +30,7 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
 
     private static HashMap<String,ValueEventListener> registeredListeners = new HashMap<String,ValueEventListener>(1);
 
-    private String userId;
+    private static String userId;
 
     public FirebaseMovieFavorites(){
         //Empty for firebase
@@ -51,13 +54,15 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
+        FirebaseMovieFavorites.userId = firebaseUser.getUid();
+
         if (firebaseUser == null) {
 
             //There is no currently logged in user!
             callback.failure("User is not logged in!");
         }
         else {
-
+            Timber.d("favoriteDebug going to register!");
             registerForFavorites(registrationId,firebaseUser,callback);
         }
 
@@ -124,9 +129,13 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
 
         // Instantiate our new listener:
 
+        Timber.d("favoriteDebug with current ref = " + ref.toString());
+
         ValueEventListener newListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Timber.d("favoriteDebug data change!!! " + dataSnapshot.toString());
 
                 boolean dirtyList = false;
 
@@ -157,6 +166,7 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+                Timber.d("favoriteDebug errorrrrrrr!");
                 // Log the database error:
                 Log.w(TAG, "onDataChanged onCancelled: " + registrationId, new Exception(": ValueEventListener cancelled: " + databaseError.getMessage()) );
                 // Remove this listener:
@@ -174,9 +184,10 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
         // remove any old listeners for this id:
         ValueEventListener oldListener = registeredListeners.remove(registrationId);
         if (oldListener != null) {
-            Timber.d("onDataChanged oldListener not null");
+            Timber.d("favoriteDebug old listener is not null!");
             ref.child(FB_NODE).child(firebaseUser.getUid()).removeEventListener(oldListener);
         }else{
+            Timber.d("favoriteDebug old listener is null!");
             Timber.d("onDataChanged oldListener null");
         }
 
@@ -184,14 +195,27 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
         // store the listener:
         registeredListeners.put(registrationId, newListener);
 
+        Timber.d("favoriteDebug registering at " + FB_NODE+"/"+firebaseUser.getUid());
         // attach the listener:
         ref.child(FB_NODE).child(firebaseUser.getUid()).addValueEventListener(newListener);
 
 
     }
 
+    String n;
+    DatabaseReference number;
+    DatabaseReference dataRef;
+
     public void save() {
+
+        Timber.d("favoriteDebug saving at " + FB_NODE+"/"+this.userId);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child(FB_NODE).child(this.userId).setValue(this);
+        ref.child("FAVORITE_TEST").child("ALSO_TEST").setValue("ASDF").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Timber.d("favoriteDebug with task = " + task.isSuccessful());
+            }
+        });
     }
 }

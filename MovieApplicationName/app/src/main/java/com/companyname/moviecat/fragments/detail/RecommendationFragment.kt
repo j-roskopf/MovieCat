@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import butterknife.ButterKnife
-import com.companyname.movieapplicationname.R
 import com.companyname.moviecat.adapters.MovieSearchResultAdapter
 import com.companyname.moviecat.data.MovieApiManager
 import com.companyname.moviecat.firebase.FirebaseMovieFavorites
@@ -21,7 +20,7 @@ import com.companyname.moviecat.kotterknife.bindView
 import com.companyname.moviecat.models.Callback
 import com.companyname.moviecat.models.MovieSearchResults
 import com.companyname.moviecat.models.retrofit.movie_find.Recommendation
-import com.google.firebase.analytics.FirebaseAnalytics
+import com.moviecat.joe.R
 import nl.komponents.kovenant.Promise
 import nl.komponents.kovenant.deferred
 import timber.log.Timber
@@ -47,9 +46,6 @@ class RecommendationFragment : Fragment() {
         if (arguments != null) {
             movieId = arguments.getString(MOVIE_ID)
         }
-
-        FirebaseAnalytics.getInstance(activity).setCurrentScreen(activity, "RecommendationFragment", null /* class override */)
-
     }
 
     override fun onResume() {
@@ -123,7 +119,7 @@ class RecommendationFragment : Fragment() {
 
         val mLayoutManager = LinearLayoutManager(context)
         rec.layoutManager = mLayoutManager
-        val movieSearchResultAdapter: MovieSearchResultAdapter = MovieSearchResultAdapter(false,
+        val movieSearchResultAdapter: MovieSearchResultAdapter = MovieSearchResultAdapter(true,
                 MasterRatingsList.getInstance().firebaseMovieRatingsList,
                 MasterFavoriteList.getInstance().firebaseMovieFavoritesList, context, recommendations)
         rec.adapter = movieSearchResultAdapter

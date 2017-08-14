@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
-import com.companyname.movieapplicationname.R;
 import com.companyname.moviecat.adapters.MovieSearchResultAdapter;
 import com.companyname.moviecat.animations.CatTransition;
 import com.companyname.moviecat.data.MovieApiManager;
@@ -25,7 +24,7 @@ import com.companyname.moviecat.firebase.MasterFavoriteList;
 import com.companyname.moviecat.firebase.MasterRatingsList;
 import com.companyname.moviecat.models.MovieSearchResults;
 import com.companyname.moviecat.models.MovieSearchResultsList;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.moviecat.joe.R;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -68,8 +67,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FirebaseAnalytics.getInstance(getActivity()).setCurrentScreen(getActivity(), "HomeFragment", null /* class override */);
     }
 
     @Override

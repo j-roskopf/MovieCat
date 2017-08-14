@@ -92,6 +92,5 @@ public class ListUtil {
             firebaseMovieFavorites.remove(positionToRemove);
             firebaseMovieFavorites.save();
         }
-
     }
 }

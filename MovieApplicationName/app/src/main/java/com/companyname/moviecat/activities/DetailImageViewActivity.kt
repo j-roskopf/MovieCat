@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.companyname.movieapplicationname.R
+import com.moviecat.joe.R
 import com.companyname.moviecat.data.Const
 import com.companyname.moviecat.kotterknife.bindView
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.liuguangqiang.swipeback.SwipeBackActivity
 import com.liuguangqiang.swipeback.SwipeBackLayout
 
@@ -23,8 +22,6 @@ class DetailImageViewActivity : SwipeBackActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_image_view)
         setDragEdge(SwipeBackLayout.DragEdge.LEFT)
-
-        FirebaseAnalytics.getInstance(this).setCurrentScreen(this, "DetailImageViewActivity", null /* class override */)
 
         if(intent.hasExtra(PATH)){
             val filePath: String = intent.extras.getString(PATH)

@@ -9,13 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import com.companyname.movieapplicationname.R
+import com.moviecat.joe.R
 import com.companyname.moviecat.adapters.MovieSearchResultAdapter
 import com.companyname.moviecat.firebase.MasterFavoriteList
 import com.companyname.moviecat.firebase.MasterRatingsList
 import com.companyname.moviecat.firebase.MasterWatchList
 import com.companyname.moviecat.models.MovieSearchResults
-import com.google.firebase.analytics.FirebaseAnalytics
 import java.util.*
 
 /**
@@ -33,8 +32,6 @@ class WatchedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        FirebaseAnalytics.getInstance(activity).setCurrentScreen(activity, "WatchedFragment", null /* class override */)
 
     }
 

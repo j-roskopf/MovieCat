@@ -8,6 +8,8 @@ import com.companyname.moviecat.util.MapUtil;
 
 import java.util.ArrayList;
 
+import timber.log.Timber;
+
 /**
  * Created by Joe on 6/19/2017.
  */
@@ -31,9 +33,15 @@ public class MasterFavoriteList {
         instance = new MasterFavoriteList();
         initCallback = callback;
 
+        firebaseMovieFavorites = new FirebaseMovieFavorites();
+        firebaseMovieFavoritesList = new ArrayList<>();
+
+        Timber.d("favoriteDebug favorite init done!");
+
         FirebaseMovieFavorites.registerForFavorites("MASTER_FAVORITE_LIST", new Callback<FirebaseMovieFavorites>() {
             @Override
             public void success(FirebaseMovieFavorites firebaseMovieFavorites) {
+                Timber.d("favoriteDebug success return!");
                 MasterFavoriteList.firebaseMovieFavorites = firebaseMovieFavorites;
                 MasterFavoriteList.firebaseMovieFavoritesList = MapUtil.convertMapToList(firebaseMovieFavorites);
 

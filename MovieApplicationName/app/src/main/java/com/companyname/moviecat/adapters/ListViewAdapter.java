@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.companyname.movieapplicationname.R;
+import com.moviecat.joe.R;
 import com.companyname.moviecat.activities.DetailActivity;
 import com.companyname.moviecat.data.Const;
 import com.companyname.moviecat.models.MovieSearchResults;

@@ -2,7 +2,7 @@ package com.companyname.moviecat
 
 import android.app.Application
 
-import com.companyname.movieapplicationname.BuildConfig
+import com.moviecat.joe.BuildConfig
 
 import timber.log.Timber
 

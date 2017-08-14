@@ -11,14 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.companyname.movieapplicationname.R;
 import com.companyname.moviecat.adapters.MovieSearchResultAdapter;
 import com.companyname.moviecat.animations.CatTransition;
 import com.companyname.moviecat.firebase.MasterFavoriteList;
 import com.companyname.moviecat.firebase.MasterRatingsList;
 import com.companyname.moviecat.models.UserList;
 import com.companyname.moviecat.util.MapUtil;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.moviecat.joe.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,8 +49,6 @@ public class ListViewFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FirebaseAnalytics.getInstance(getActivity()).setCurrentScreen(getActivity(), "ListViewFragment", null /* class override */);
     }
 
     @Override

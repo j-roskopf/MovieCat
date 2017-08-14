@@ -14,7 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.ButterKnife
 import com.bumptech.glide.Glide
-import com.companyname.movieapplicationname.R
+import com.moviecat.joe.R
 import com.companyname.moviecat.data.Const
 import com.companyname.moviecat.kotterknife.bindView
 import com.companyname.moviecat.models.retrofit.movie_find.Person

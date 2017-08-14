@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.companyname.movieapplicationname.R
 import com.companyname.moviecat.adapters.CastAndCreditsAdapter
 import com.companyname.moviecat.data.MovieApiManager
 import com.companyname.moviecat.kotterknife.bindView
@@ -16,7 +15,7 @@ import com.companyname.moviecat.models.retrofit.movie_find.Cast
 import com.companyname.moviecat.models.retrofit.movie_find.CastAndCredits
 import com.companyname.moviecat.models.retrofit.movie_find.Crew
 import com.companyname.moviecat.models.retrofit.movie_find.Person
-import com.google.firebase.analytics.FirebaseAnalytics
+import com.moviecat.joe.R
 
 /**
  * A simple [Fragment] subclass.
@@ -38,8 +37,6 @@ class CastAndCreditFragment : Fragment() {
         if (arguments != null) {
             movieId = arguments.getString(MOVIE_ID)
         }
-
-        FirebaseAnalytics.getInstance(activity).setCurrentScreen(activity, "CastAndCreditsFragment", null /* class override */)
     }
 
 

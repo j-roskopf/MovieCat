@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.companyname.movieapplicationname.R;
+import com.moviecat.joe.R;
 import com.companyname.moviecat.events.AddListEvent;
 import com.companyname.moviecat.events.ListViewEvent;
 import com.companyname.moviecat.models.UserList;

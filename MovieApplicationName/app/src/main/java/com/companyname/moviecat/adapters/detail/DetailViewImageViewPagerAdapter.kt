@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
-import com.companyname.movieapplicationname.R
+import com.moviecat.joe.R
 import com.companyname.moviecat.activities.DetailImageViewActivity
 import com.companyname.moviecat.data.Const
 import com.companyname.moviecat.models.retrofit.movie_find.Image

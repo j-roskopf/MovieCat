@@ -31,6 +31,10 @@ public class MasterUserList {
         instance = new MasterUserList();
         initCallback = callback;
 
+
+        firebaseMovieLists = new FirebaseMovieLists();
+        firebaseMovieListslist = new ArrayList<>();
+
         FirebaseMovieLists.registerForUserList("MASTER_USER_LIST", new Callback<FirebaseMovieLists>() {
             @Override
             public void success(FirebaseMovieLists firebaseMovieLists) {

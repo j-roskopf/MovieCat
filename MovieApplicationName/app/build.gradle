@@ -27,7 +27,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
     testCompile 'junit:junit:4.12'
 
     // apt command comes from the android-apt plugin
@@ -38,15 +37,14 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
-    compile 'com.google.firebase:firebase-core:10.2.6'
-    compile 'com.google.firebase:firebase-database:10.2.6'
-    compile 'com.google.firebase:firebase-auth:10.2.6'
-    compile 'com.google.firebase:firebase-crash:10.2.6'
+    compile 'com.google.firebase:firebase-core:11.0.4'
+    compile 'com.google.firebase:firebase-database:11.0.4'
+    compile 'com.google.firebase:firebase-auth:11.0.4'
 
 
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.google.code.gson:gson:2.8.0'
 
     compile 'com.jakewharton.timber:timber:4.5.1'
 
@@ -69,7 +67,7 @@ dependencies {
 
     compile 'me.zhanghai.android.materialratingbar:library:1.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     compile 'me.relex:circleindicator:1.2.2@aar'
 

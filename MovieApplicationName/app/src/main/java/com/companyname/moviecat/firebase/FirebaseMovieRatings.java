@@ -58,6 +58,7 @@ public class FirebaseMovieRatings extends HashMap<String, MovieSearchResults>{
         }
         else {
 
+            Timber.d("masterRatings going to register");
             registerForRatingsList(registrationId,firebaseUser,callback);
         }
 
@@ -125,6 +126,8 @@ public class FirebaseMovieRatings extends HashMap<String, MovieSearchResults>{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                Timber.d("masterRatings value event listener returned");
+
                 boolean dirtyList = false;
 
                 GenericTypeIndicator<HashMap<String, MovieSearchResults>> t = new GenericTypeIndicator<HashMap<String, MovieSearchResults>>() {};
@@ -151,6 +154,8 @@ public class FirebaseMovieRatings extends HashMap<String, MovieSearchResults>{
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
+                Timber.d("masterRatings value event listener canceled");
 
                 // Log the database error:
                 Log.w(TAG, "onDataChanged onCancelled: " + registrationId, new Exception(": ValueEventListener cancelled: " + databaseError.getMessage()) );

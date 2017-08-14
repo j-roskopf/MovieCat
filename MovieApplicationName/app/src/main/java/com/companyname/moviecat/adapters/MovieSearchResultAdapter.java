@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.companyname.movieapplicationname.R;
+import com.moviecat.joe.R;
 import com.companyname.moviecat.activities.DetailActivity;
 import com.companyname.moviecat.data.Const;
 import com.companyname.moviecat.events.RatingListEvent;
@@ -134,6 +134,10 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         }
 
         private void setRatingForMovieFromList(MovieSearchResults movieSearchResults) {
+            if (movieSearchResults == null || firebaseMovieRatings == null) {
+                return;
+            }
+
             for (MovieSearchResults movie : firebaseMovieRatings) {
                 if (movie.getId().equals(movieSearchResults.getId())) {
                     //update the rating of the object to be displayed

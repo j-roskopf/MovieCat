@@ -17,7 +17,6 @@ import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
 import butterknife.ButterKnife
-import com.companyname.movieapplicationname.R
 import com.companyname.moviecat.adapters.MovieSearchResultAdapter
 import com.companyname.moviecat.adapters.MyListAdapter
 import com.companyname.moviecat.adapters.detail.DetailViewFragmentViewPagerAdapter
@@ -35,8 +34,8 @@ import com.companyname.moviecat.models.retrofit.movie_find.Backdrop
 import com.companyname.moviecat.models.retrofit.movie_find.Image
 import com.companyname.moviecat.models.retrofit.movie_find.Poster
 import com.companyname.moviecat.util.ListUtil
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.mancj.slideup.SlideUp
+import com.moviecat.joe.R
 import kotlinx.android.synthetic.main.rating_view.*
 import me.relex.circleindicator.CircleIndicator
 import org.greenrobot.eventbus.EventBus
@@ -68,8 +67,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         ButterKnife.bind(this)
-
-        FirebaseAnalytics.getInstance(this).setCurrentScreen(this, "DetailViewActivity", null /* class override */)
 
         context = this
 

@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import com.companyname.movieapplicationname.R;
 import com.companyname.moviecat.adapters.MyListAdapter;
 import com.companyname.moviecat.animations.CatTransition;
 import com.companyname.moviecat.data.Const;
@@ -26,7 +25,7 @@ import com.companyname.moviecat.firebase.MasterUserList;
 import com.companyname.moviecat.models.Callback;
 import com.companyname.moviecat.models.UserList;
 import com.companyname.moviecat.util.MapUtil;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.moviecat.joe.R;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -55,8 +54,6 @@ public class MyListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FirebaseAnalytics.getInstance(getActivity()).setCurrentScreen(getActivity(), "MyListFragment", null /* class override */);
     }
 
     public MyListFragment() {

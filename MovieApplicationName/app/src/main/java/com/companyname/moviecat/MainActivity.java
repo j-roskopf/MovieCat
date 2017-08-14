@@ -17,7 +17,6 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.companyname.movieapplicationname.R;
 import com.companyname.moviecat.activities.BaseActivity;
 import com.companyname.moviecat.activities.SignInActivity;
 import com.companyname.moviecat.adapters.MyListAdapter;
@@ -41,6 +40,8 @@ import com.companyname.moviecat.models.Callback;
 import com.companyname.moviecat.models.MovieSearchResults;
 import com.companyname.moviecat.util.ListUtil;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 import com.mancj.slideup.SlideUp;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -52,6 +53,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.moviecat.joe.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -118,6 +120,8 @@ public class MainActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
+        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
+
         initVars();
 
         setupToolbar();
@@ -165,15 +169,17 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        Timber.d("masterRatings in initVars");
+
         MasterRatingsList.init(new Callback<Void>() {
             @Override
             public void success(Void aVoid) {
-
+                Timber.d("masterRatings in main success");
             }
 
             @Override
             public void failure(@Nullable String message) {
-
+                Timber.d("masterRatings in main fail");
             }
         });
 
