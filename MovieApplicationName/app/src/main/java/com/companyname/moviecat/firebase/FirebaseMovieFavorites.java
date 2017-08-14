@@ -1,12 +1,9 @@
 package com.companyname.moviecat.firebase;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.companyname.moviecat.models.Callback;
 import com.companyname.moviecat.models.MovieSearchResults;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -211,11 +208,5 @@ public class FirebaseMovieFavorites  extends HashMap<String,MovieSearchResults>{
         Timber.d("favoriteDebug saving at " + FB_NODE+"/"+this.userId);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child(FB_NODE).child(this.userId).setValue(this);
-        ref.child("FAVORITE_TEST").child("ALSO_TEST").setValue("ASDF").addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Timber.d("favoriteDebug with task = " + task.isSuccessful());
-            }
-        });
     }
 }
