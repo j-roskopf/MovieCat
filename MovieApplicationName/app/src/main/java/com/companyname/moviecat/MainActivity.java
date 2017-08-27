@@ -288,12 +288,6 @@ public class MainActivity extends BaseActivity {
                 .withIcon(R.drawable.ic_home)
                 .withName("Home");
 
-        PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().
-                withIdentifier(SETTINGS_ITEM_ID)
-                .withIcon(R.drawable.ic_settings_black_18dp)
-                .withName("Settings");
-
-
         PrimaryDrawerItem watchListeItem = new PrimaryDrawerItem()
                 .withIdentifier(WATCH_LIST_ITEM_ID)
                 .withIcon(R.drawable.ic_list_black_18dp)
@@ -331,7 +325,6 @@ public class MainActivity extends BaseActivity {
                         ownListItem,
                         otherListItem,
                         favoritesItem,
-                        settingsItem,
                         new DividerDrawerItem(),
                         logoutItem
                 )

@@ -16,10 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.moviecat.joe.R;
 import com.companyname.moviecat.activities.DetailActivity;
 import com.companyname.moviecat.data.Const;
@@ -45,17 +49,13 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
 
     public static final String MOVIE = "movie";
 
-    private static final String IMDB_URL = "http://www.imdb.com/title/";
-
-    int currentlySelectedItem = 0;
-
     private Context context;
     private List<MovieSearchResults> movieList;
     private ArrayList<MovieSearchResults> firebaseMovieFavorites;
     private ArrayList<MovieSearchResults> firebaseMovieRatings;
     private boolean comingFromFavorites = false;
 
-    LayoutInflater layoutInflater;
+    private LayoutInflater layoutInflater;
 
     public class MovieResultViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.movieItemPosterImage)
@@ -87,6 +87,9 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
 
         @BindView(R.id.movieItemSummary)
         TextView movieItemSummary;
+
+        @BindView(R.id.movieItemImageProgress)
+        ProgressBar movieItemProgress;
 
         public MovieResultViewHolder(View view) {
             super(view);
@@ -125,7 +128,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
 
             boolean alreadyFavorited = false;
             for (MovieSearchResults movieSearchResults : firebaseMovieFavorites) {
-                if (movieSearchResults.getId().intValue() == id) {
+                if (movieSearchResults.getId() == id) {
                     alreadyFavorited = true;
                     break;
                 }
@@ -183,7 +186,20 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         }
 
         private void setImage(String imageUrl) {
-            Glide.with(context).load(Const.BASE_IMAGE_PATH.concat(imageUrl)).into(movieItemPosterImage);
+            Glide.with(context).load(Const.BASE_IMAGE_PATH.concat(imageUrl)).listener(new RequestListener<String, GlideDrawable>() {
+                @Override
+                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    movieItemProgress.setVisibility(View.GONE);
+                    movieItemPosterImage.setImageDrawable(context.getDrawable(android.R.drawable.stat_notify_error));
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    movieItemProgress.setVisibility(View.GONE);
+                    return false;
+                }
+            }).into(movieItemPosterImage);
         }
 
         private void setFavoriteLogic(final int position) {
@@ -281,7 +297,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
                     ratingBar.setLayoutParams(params);
                     container.addView(ratingBar);
 
-                    AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.AlertDialogTheme)
+                    AlertDialog alertDialog = new AlertDialog.Builder(context)
                             .setTitle("Add Rating")
                             .setMessage("Enter a rating out of 5 stars!")
                             .setView(container)

@@ -78,6 +78,10 @@ public class HomeFragment extends Fragment {
 
         setupSearchView();
 
+        if(!searchTerm.equals("")) {
+            search();
+        }
+
         return rootview;
     }
 

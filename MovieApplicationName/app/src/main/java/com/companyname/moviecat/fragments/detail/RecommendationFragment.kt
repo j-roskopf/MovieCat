@@ -115,7 +115,6 @@ class RecommendationFragment : Fragment() {
      * setup adapter after everything completes
      */
     private fun setupAdapter(view: View) {
-        val recycler: RecyclerView = view.findViewById(R.id.recommendationRecyclerView) as RecyclerView
 
         val mLayoutManager = LinearLayoutManager(context)
         rec.layoutManager = mLayoutManager

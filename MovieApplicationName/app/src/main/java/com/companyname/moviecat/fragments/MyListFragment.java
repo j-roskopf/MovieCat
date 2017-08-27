@@ -156,7 +156,7 @@ public class MyListFragment extends Fragment {
         final EditText input = new EditText(getContext());
         input.setSingleLine();
         input.setHint("Enter a list name");
-        input.setTextColor(ContextCompat.getColor(getContext(), R.color.md_white_1000));
+        input.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
         FrameLayout container = new FrameLayout(getContext());
         FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -166,7 +166,7 @@ public class MyListFragment extends Fragment {
         input.setLayoutParams(params);
         container.addView(input);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(getContext(), R.style.AlertDialogTheme)
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setTitle("Add List")
                 .setMessage("Enter a name for your list!")
                 .setView(container)

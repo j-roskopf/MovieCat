@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
 
         <item name="android:textColorHint">@color/md_white_1000</item>
         <item name="android:colorControlNormal">@color/onboardingBackground</item>
@@ -14,11 +13,11 @@
 
     </style>
 
-    <style name="AlertDialogTheme" parent="Theme.AppCompat.NoActionBar">
+<!--    <style name="AlertDialogTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
         <item name="android:windowAnimationStyle">@style/CustomDialogAnimation</item>
-    </style>
+    </style>-->
 
     <style name="CustomDialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
