@@ -77,8 +77,18 @@ dependencies {
 
     compile 'nl.komponents.kovenant:kovenant:3.3.0'
 
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true;
+    }
+
 }
 apply plugin: 'com.google.gms.google-services'
 repositories {
     mavenCentral()
+}
+
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
 }

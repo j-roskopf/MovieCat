@@ -29,6 +29,11 @@
         <activity android:name="com.companyname.moviecat.activities.DetailImageViewActivity" />
         <activity android:name="com.companyname.moviecat.activities.SimilarViewActivity" />
         <activity android:name="com.companyname.moviecat.activities.ReviewsViewActivity"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="645a4f00c6812a6a8eb63dce16845a656fdadd7d"
+            />
     </application>
 
 </manifest>

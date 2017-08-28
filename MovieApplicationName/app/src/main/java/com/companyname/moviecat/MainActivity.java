@@ -39,6 +39,7 @@ import com.companyname.moviecat.fragments.WatchedFragment;
 import com.companyname.moviecat.models.Callback;
 import com.companyname.moviecat.models.MovieSearchResults;
 import com.companyname.moviecat.util.ListUtil;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Logger;
@@ -61,6 +62,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 public class MainActivity extends BaseActivity {
@@ -117,6 +119,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Fabric.with(this, new Crashlytics());
 
         ButterKnife.bind(this);
 
@@ -293,11 +297,6 @@ public class MainActivity extends BaseActivity {
                 .withIcon(R.drawable.ic_list_black_18dp)
                 .withName("Watched List");
 
-        PrimaryDrawerItem ownListItem = new PrimaryDrawerItem()
-                .withIdentifier(OWN_LIST_ITEM_ID)
-                .withIcon(R.drawable.ic_list_black_18dp)
-                .withName("Owned List");
-
         PrimaryDrawerItem otherListItem = new PrimaryDrawerItem()
                 .withIdentifier(OTHER_LIST_ITEM_ID)
                 .withIcon(R.drawable.ic_list_black_18dp)
@@ -322,7 +321,6 @@ public class MainActivity extends BaseActivity {
                 .addDrawerItems(
                         homeItem,
                         watchListeItem,
-                        ownListItem,
                         otherListItem,
                         favoritesItem,
                         new DividerDrawerItem(),
