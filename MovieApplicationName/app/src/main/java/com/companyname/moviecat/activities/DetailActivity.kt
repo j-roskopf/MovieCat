@@ -23,6 +23,7 @@ import com.companyname.moviecat.adapters.detail.DetailViewFragmentViewPagerAdapt
 import com.companyname.moviecat.adapters.detail.DetailViewImageViewPagerAdapter
 import com.companyname.moviecat.data.MovieApiManager
 import com.companyname.moviecat.events.AddListEvent
+import com.companyname.moviecat.events.RatingListEvent
 import com.companyname.moviecat.firebase.MasterUserList
 import com.companyname.moviecat.fragments.detail.CastAndCreditFragment
 import com.companyname.moviecat.fragments.detail.InfoFragment
@@ -63,6 +64,8 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var movie: MovieSearchResults
 
+    private lateinit var movieSearchResults: MovieSearchResults
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -88,6 +91,11 @@ class DetailActivity : AppCompatActivity() {
         setupFab()
 
         setupFragmentViewPager(movie.id)
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -220,6 +228,16 @@ class DetailActivity : AppCompatActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(addListEvent: AddListEvent) {
-            ListUtil.addMovieToList(dimView, addListEvent.userList.listName, movie, MasterUserList.getInstance().firebaseMovieListslist)
+        if (movieSearchResults != null)
+            ListUtil.addMovieToList(dimView, addListEvent.userList.listName, movieSearchResults, MasterUserList.getInstance().firebaseMovieListslist)
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: RatingListEvent) {
+        if (event.show) {
+            movieSearchResults = event.movieSearchResults
+            slideUp.show()
+        }
+    }
+
 }

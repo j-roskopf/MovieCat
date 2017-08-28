@@ -24,7 +24,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.moviecat.joe.R;
 import com.companyname.moviecat.activities.DetailActivity;
 import com.companyname.moviecat.data.Const;
 import com.companyname.moviecat.events.RatingListEvent;
@@ -32,6 +31,7 @@ import com.companyname.moviecat.firebase.MasterFavoriteList;
 import com.companyname.moviecat.firebase.MasterRatingsList;
 import com.companyname.moviecat.models.MovieSearchResults;
 import com.companyname.moviecat.util.ListUtil;
+import com.moviecat.joe.R;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
 
