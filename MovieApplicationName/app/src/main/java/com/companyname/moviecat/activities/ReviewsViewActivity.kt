@@ -1,9 +1,11 @@
 package com.companyname.moviecat.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.Toast
 import butterknife.ButterKnife
 import com.companyname.moviecat.adapters.ReviewAdapter
 import com.companyname.moviecat.data.MovieApiManager
@@ -21,12 +23,16 @@ class ReviewsViewActivity : AppCompatActivity() {
 
     private val ratingsViewRecyclerView: RecyclerView by bindView(R.id.ratingsViewRecyclerView)
 
+    private var context: Context? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reviews_view)
 
         ButterKnife.bind(this)
+
+        context = this
 
         if(intent.extras.containsKey(InfoFragment.MOVIE_ID)){
             val movieApiManager: MovieApiManager = MovieApiManager(this)
@@ -53,7 +59,8 @@ class ReviewsViewActivity : AppCompatActivity() {
             }
 
             override fun failure(message: String?) {
-
+                Toast.makeText(context, "No Reviews", Toast.LENGTH_SHORT).show()
+                finish()
             }
 
         })
@@ -65,13 +72,16 @@ class ReviewsViewActivity : AppCompatActivity() {
      * Called after fetch returns with results
      */
     private fun setupAdapter(t: ReviewResults?) {
-        if (t != null) {
+        if (t != null && (t.results?.size ?: 0) > 0) {
             val mLayoutManager = LinearLayoutManager(this)
             ratingsViewRecyclerView.layoutManager = mLayoutManager
 
             val reviewAdapter = ReviewAdapter(this, t)
 
             ratingsViewRecyclerView.adapter = reviewAdapter
+        }else{
+            Toast.makeText(context, "No Reviews", Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 
