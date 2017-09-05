@@ -119,7 +119,9 @@ public class MovieApiManager {
             movieService.getMovie(encodedId, Const.API_KEY).enqueue(new Callback<Movie>() {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
-                    movieCallback.success(response.body());
+                    if(response != null && response.body() != null){
+                        movieCallback.success(response.body());
+                    }
                 }
 
                 @Override
@@ -145,7 +147,9 @@ public class MovieApiManager {
             movieService.getMovieImages(encodedId, Const.API_KEY).enqueue(new Callback<MovieImage>() {
                 @Override
                 public void onResponse(Call<MovieImage> call, Response<MovieImage> response) {
-                    movieCallback.success(response.body());
+                    if(response != null && response.body() != null){
+                        movieCallback.success(response.body());
+                    }
                 }
 
                 @Override
@@ -171,7 +175,9 @@ public class MovieApiManager {
             movieService.getMovieRecommendations(encodedId, Const.API_KEY).enqueue(new Callback<Recommendation>() {
                 @Override
                 public void onResponse(Call<Recommendation> call, Response<Recommendation> response) {
-                    movieCallback.success(response.body());
+                    if(response != null && response.body() != null){
+                        movieCallback.success(response.body());
+                    }
                 }
 
                 @Override
@@ -197,7 +203,9 @@ public class MovieApiManager {
             movieService.getSimilarMovies(encodedId, Const.API_KEY).enqueue(new Callback<MovieSearchResultsList>() {
                 @Override
                 public void onResponse(Call<MovieSearchResultsList> call, Response<MovieSearchResultsList> response) {
-                    movieCallback.success(response.body());
+                    if(response != null && response.body() != null){
+                        movieCallback.success(response.body());
+                    }
                 }
 
                 @Override
@@ -220,7 +228,9 @@ public class MovieApiManager {
         movieService.getCastAndCredits(id, Const.API_KEY).enqueue(new Callback<CastAndCredits>() {
             @Override
             public void onResponse(Call<CastAndCredits> call, Response<CastAndCredits> response) {
-                castAndCreditsCallback.success(response.body());
+                if(response != null && response.body() != null){
+                    castAndCreditsCallback.success(response.body());
+                }
             }
 
             @Override

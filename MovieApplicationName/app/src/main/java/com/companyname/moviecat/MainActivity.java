@@ -41,8 +41,6 @@ import com.companyname.moviecat.models.MovieSearchResults;
 import com.companyname.moviecat.util.ListUtil;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
 import com.mancj.slideup.SlideUp;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -123,8 +121,6 @@ public class MainActivity extends BaseActivity {
         Fabric.with(this, new Crashlytics());
 
         ButterKnife.bind(this);
-
-        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
 
         initVars();
 
